@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 ریاضی‌یاد - کلاس پنجم (نسخه آموزشی)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #e0f7fa, #f0f8ff);
+            min-height: 100vh;
+            padding: 20px;
+            color: #0d47a1;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(to right, #4a90e2, #5e72e4);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 25px;
+        }
+        .welcome-screen {
+            text-align: center;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+        }
+        input {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.3em;
+            border: 3px solid #bbdefb;
+            border-radius: 12px;
+            text-align: center;
+            margin: 15px 0;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+        }
+        button {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.4em;
+            background: linear-gradient(to right, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.02);
+        }
+        .lesson-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 3px solid #4fc3f7;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.6em;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(79, 195, 247, 0.2);
+        }
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .option-btn {
+            padding: 15px;
+            font-size: 1.2em;
+            background: #e3f2fd;
+            border: 2px solid #bbdefb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-btn:hover {
+            background: #bbdefb;
+            transform: scale(1.03);
+        }
+        .status {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 15px 0;
+            color: #555;
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4caf50, #8bc34a);
+            width: 0%;
+            transition: width 0.4s;
+        }
+        .result {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+        }
+        .emoji {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .score {
+            font-weight: bold;
+            color: #e65100;
+            font-size: 1.3em;
+        }
+        .leaderboard {
+            background: #fff3e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .leaderboard h3 {
+            color: #ef6c00;
+            margin-bottom: 10px;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px dashed #ffcc80;
+        }
+        .send-email {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+        .explanation {
+            background: #fff8e1;
+            border: 2px dashed #ffc107;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+            color: #e65100;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .menu-btn {
+            padding: 15px;
+            font-size: 1.2em;
+            background: #e1f5fe;
+            border: 2px solid #0288d1;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #0288d1;
+            font-weight: bold;
+        }
+        .menu-btn:hover {
+            background: #81d4fa;
+            transform: scale(1.03);
+        }
+        .chapter-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0d47a1;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .lesson-content {
+            text-align: right;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+            border: 2px solid #bbdefb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 ریاضی‌یاد - کلاس پنجم</h1>
+            <p>نسخه آموزشی - همه مباحث کتاب!</p>
+        </div>
+        
+        <div class="content">
+            <div id="welcome" class="welcome-screen">
+                <div class="avatar">📚</div>
+                <p style="font-size:1.3em; margin:10px 0; color:#0d47a1;">
+                    سلام! اسمت رو وارد کن تا شروع کنیم! 😊
+                </p>
+                <input type="text" id="nameInput" placeholder="اسمتو وارد کن..." maxlength="20">
+                <button onclick="startApp()">شروع یادگیری 🎮</button>
+            </div>
+            
+            <div id="mainMenu" class="hidden">
+                <div class="status">
+                    خوش اومدی، <span id="userName"></span>! 😊
+                </div>
+                <div class="menu">
+                    <button class="menu-btn" onclick="openLessonMenu()">📖 درس‌ها</button>
+                    <button class="menu-btn" onclick="openQuiz()">📝 آزمون</button>
+                    <button class="menu-btn" onclick="openExamples()">💡 مثال‌ها</button>
+                    <button class="menu-btn" onclick="openExercises()">✏️ تمرین‌ها</button>
+                </div>
+            </div>
+            
+            <div id="lessonMenu" class="hidden">
+                <div class="chapter-title">انتخاب فصل</div>
+                <div class="menu">
+                    <button class="menu-btn" onclick="loadLesson(1)">فصل 1: الگوها</button>
+                    <button class="menu-btn" onclick="loadLesson(2)">فصل 2: کسرها</button>
+                    <button class="menu-btn" onclick="loadLesson(3)">فصل 3: اعشاری‌ها</button>
+                    <button class="menu-btn" onclick="loadLesson(4)">فصل 4: اندازه‌گیری</button>
+                    <button class="menu-btn" onclick="loadLesson(5)">فصل 5: هندسه</button>
+                    <button class="menu-btn" onclick="loadLesson(6)">فصل 6: نسبت</button>
+                    <button class="menu-btn" onclick="loadLesson(7)">فصل 7: درصد</button>
+                    <button class="menu-btn" onclick="loadLesson(8)">فصل 8: آمار</button>
+                    <button class="menu-btn" onclick="loadLesson(9)">فصل 9: جبر</button>
+                    <button class="menu-btn" onclick="loadLesson(10)">فصل 10: حجم</button>
+                    <button class="menu-btn" onclick="backToMainMenu()">🔙 بازگشت</button>
+                </div>
+            </div>
+            
+            <div id="lessonContent" class="hidden">
+                <div class="chapter-title" id="chapterTitle">فصل 1: الگوها</div>
+                <div class="lesson-content" id="lessonText">
+                    محتوای آموزشی اینجا نمایش داده می‌شه...
+                </div>
+                <button onclick="backToLessonMenu()">🔙 بازگشت به فصل‌ها</button>
+            </div>
+            
+            <div id="quizSection" class="hidden">
+                <!-- بخش آزمون (همون کد قبلی) -->
+                <div class="status">
+                    سؤال <span id="qNum">1</span> از <span id="totalQ">10</span>  
+                    <br><span class="score">امتیاز: <span id="score">0</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="question-box" id="question">سوال اینجا نمایش داده می‌شه...</div>
+                
+                <div class="options">
+                    <button class="option-btn" onclick="selectOption(0)">الف</button>
+                    <button class="option-btn" onclick="selectOption(1)">ب</button>
+                    <button class="option-btn" onclick="selectOption(2)">ج</button>
+                    <button class="option-btn" onclick="selectOption(3)">د</button>
+                </div>
+                
+                <button id="submitBtn" style="display:none;" onclick="checkAnswer()">بررسی پاسخ ✅</button>
+                
+                <div id="explanationBox" class="explanation hidden">
+                    توضیح تشریحی اینجا نمایش داده می‌شه...
+                </div>
+                
+                <button id="nextBtn" style="display:none;" onclick="nextQuestion()">سوال بعدی ➡️</button>
+                <button onclick="backToMainMenu()">🔙 بازگشت به منو</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let name = "";
+        let currentChapter = 1;
+        
+        // محتوای آموزشی برای هر فصل
+        const lessons = {
+            1: {
+                title: "فصل 1: الگوهای عددی و هندسی",
+                content: `
+                    <p><b>الگوهای عددی:</b></p>
+                    <p>الگوی عددی دنباله‌ای از اعداد است که بین آن‌ها یک رابطه وجود دارد.</p>
+                    <p>مثال: 2, 4, 6, 8, ... (هر عدد 2 تا بیشتر از قبلی است)</p>
+                    <p><b>الگوهای هندسی:</b></p>
+                    <p>الگوی هندسی دنباله‌ای از شکل‌هاست که یک رابطه بصری دارند.</p>
+                    <p>مثال: مثلث، مربع، پنج‌ضلعی، ... (تعداد ضلع‌ها زیاد می‌شود)</p>
+                    <p><b>نکته:</b> برای پیدا کردن عدد بعدی در یک الگو، باید رابطه بین اعداد را پیدا کنیم.</p>
+                `
+            },
+            2: {
+                title: "فصل 2: کسرها",
+                content: `
+                    <p><b>کسر چیست؟</b></p>
+                    <p>کسر نشان‌دهنده بخشی از یک کل است. به صورت a/b نوشته می‌شود.</p>
+                    <p><b>جمع و تفریق کسرها:</b></p>
+                    <p>برای جمع یا تفریق کسرها، ابتدا باید مخرج مشترک پیدا کنیم.</p>
+                    <p>مثال: 1/4 + 1/2 = 1/4 + 2/4 = 3/4</p>
+                    <p><b>ضرب و تقسیم کسرها:</b></p>
+                    <p>ضرب: صورت‌ها در هم و مخرج‌ها در هم ضرب می‌شوند.</p>
+                    <p>تقسیم: کسر اول در معکوس کسر دوم ضرب می‌شود.</p>
+                `
+            },
+            3: {
+                title: "فصل 3: اعداد اعشاری",
+                content: `
+                    <p><b>اعداد اعشاری چیستند؟</b></p>
+                    <p>اعدادی هستند که بخش اعشاری (پس از ممیز) دارند. مانند 3.14</p>
+                    <p><b>جمع و تفریق اعشاری:</b></p>
+                    <p>اعداد را زیر هم می‌نویسیم و ممیزها را هم‌تراز می‌کنیم.</p>
+                    <p><b>ضرب اعشاری:</b></p>
+                    <p>اعداد را بدون توجه به ممیز ضرب می‌کنیم، سپس تعداد ارقام اعشاری را در نظر می‌گیریم.</p>
+                `
+            },
+            4: {
+                title: "فصل 4: اندازه‌گیری",
+                content: `
+                    <p><b>واحدهای طول:</b></p>
+                    <p>میلی‌متر (mm)، سانتی‌متر (cm)، متر (m)، کیلومتر (km)</p>
+                    <p>هر متر = 100 سانتی‌متر</p>
+                    <p><b>واحدهای جرم:</b></p>
+                    <p>گرم (g)، کیلوگرم (kg)، تن (t)</p>
+                    <p>هر کیلوگرم = 1000 گرم</p>
+                    <p><b>واحدهای زمان:</b></p>
+                    <p>ثانیه، دقیقه، ساعت، روز، هفته، ماه، سال</p>
+                `
+            },
+            5: {
+                title: "فصل 5: هندسه (مساحت، محیط، زاویه)",
+                content: `
+                    <p><b>محیط:</b></p>
+                    <p>جمع اندازه همه ضلع‌های یک شکل.</p>
+                    <p>مثال: محیط مربع = 4 × ضلع</p>
+                    <p><b>مساحت:</b></p>
+                    <p>فضای داخل یک شکل.</p>
+                    <p>مثال: مساحت مستطیل = طول × عرض</p>
+                    <p><b>زاویه:</b></p>
+                    <p>باز شدن بین دو نیم‌خط. واحد آن درجه است.</p>
+                    <p>زاویه تند (< 90°)، راست (= 90°)، باز (> 90°)</p>
+                `
+            },
+            6: {
+                title: "فصل 6: نسبت و تناسب",
+                content: `
+                    <p><b>نسبت:</b></p>
+                    <p>مقایسه دو کمیت با هم. مانند 2 به 3 یا 2:3</p>
+                    <p><b>تناسب:</b></p>
+                    <p>برابر بودن دو نسبت. مانند 2/3 = 4/6</p>
+                    <p><b>کاربرد:</b></p>
+                    <p>برای حل مسائلی که یک رابطه مستقیم دارند. مثلاً اگر 2 کیلو سیب 10 هزار تومان باشد، 5 کیلو چقدر؟</p>
+                `
+            },
+            7: {
+                title: "فصل 7: درصد",
+                content: `
+                    <p><b>درصد چیست؟</b></p>
+                    <p>درصد یعنی از هر 100 تا. نماد آن % است.</p>
+                    <p>مثال: 25% یعنی 25 از 100 یا 25/100</p>
+                    <p><b>تبدیل کسر به درصد:</b></p>
+                    <p>صورت را بر مخرج تقسیم کن و در 100 ضرب کن.</p>
+                    <p><b>محاسبه درصد یک عدد:</b></p>
+                    <p>عدد را در درصد ضرب کن و تقسیم بر 100 کن.</p>
+                `
+            },
+            8: {
+                title: "فصل 8: آمار و احتمال",
+                content: `
+                    <p><b>آمار:</b></p>
+                    <p>جمع‌آوری، سازمان‌دهی و تحلیل داده‌ها.</p>
+                    <p><b>نمودارها:</b></p>
+                    <p>برای نمایش داده‌ها از نمودار میله‌ای، دایره‌ای و خطی استفاده می‌کنیم.</p>
+                    <p><b>احتمال:</b></p>
+                    <p>شانس وقوع یک پیشامد. بین 0 و 1 است.</p>
+                    <p>مثال: احتمال آمدن شیر در انداختن سکه = 1/2</p>
+                `
+            },
+            9: {
+                title: "فصل 9: جبر (الگوهای عددی و جبری)",
+                content: `
+                    <p><b>الگوهای عددی:</b></p>
+                    <p>یافتن رابطه بین اعداد و نوشتن آن به صورت کلامی یا جبری.</p>
+                    <p><b>عبارت جبری:</b></p>
+                    <p>ترکیبی از عدد و حرف (متغیر).</p>
+                    <p>مثال: 2x + 3</p>
+                    <p><b>محاسبه مقدار عبارت جبری:</b></p>
+                    <p>به جای متغیر، عدد می‌گذاریم و حساب می‌کنیم.</p>
+                `
+            },
+            10: {
+                title: "فصل 10: حجم و سطح",
+                content: `
+                    <p><b>حجم:</b></p>
+                    <p>فضایی که یک جسم اشغال می‌کند. واحد آن متر مکعب (m³) است.</p>
+                    <p>حجم مکعب = ضلع × ضلع × ضلع</p>
+                    <p><b>سطح کل:</b></p>
+                    <p>مجموع مساحت همه وجه‌های یک جسم.</p>
+                    <p>مثال: سطح کل مکعب = 6 × (ضلع × ضلع)</p>
+                `
+            }
+        };
+        
+        function startApp() {
+            name = document.getElementById('nameInput').value.trim();
+            if (!name) name = "بچه‌ی باهوش";
+            
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('mainMenu').classList.remove('hidden');
+            document.getElementById('userName').textContent = name;
+        }
+        
+        function openLessonMenu() {
+            document.getElementById('mainMenu').classList.add('hidden');
+            document.getElementById('lessonMenu').classList.remove('hidden');
+        }
+        
+        function backToMainMenu() {
+            document.getElementById('lessonMenu').classList.add('hidden');
+            document.getElementById('lessonContent').classList.add('hidden');
+            document.getElementById('quizSection').classList.add('hidden');
+            document.getElementById('mainMenu').classList.remove('hidden');
+        }
+        
+        function backToLessonMenu() {
+            document.getElementById('lessonContent').classList.add('hidden');
+            document.getElementById('lessonMenu').classList.remove('hidden');
+        }
+        
+        function loadLesson(chapter) {
+            currentChapter = chapter;
+            const lesson = lessons[chapter];
+            document.getElementById('chapterTitle').textContent = lesson.title;
+            document.getElementById('lessonText').innerHTML = lesson.content;
+            
+            document.getElementById('lessonMenu').classList.add('hidden');
+            document.getElementById('lessonContent').classList.remove('hidden');
+        }
+        
+        function openQuiz() {
+            // بخش آزمون (همون کد قبلی)
+            document.getElementById('mainMenu').classList.add('hidden');
+            document.getElementById('quizSection').classList.remove('hidden');
+            startGame(); // تابع شروع آزمون از کد قبلی
+        }
+        
+        function openExamples() {
+            alert("💡 بخش مثال‌ها: این بخش در حال ساخت است. به زودی اضافه می‌شه!");
+            // می‌تونی اینجا محتوای مثال‌ها رو اضافه کنی
+        }
+        
+        function openExercises() {
+            alert("✏️ بخش تمرین‌ها: این بخش در حال ساخت است. به زودی اضافه می‌شه!");
+            // می‌تونی اینجا محتوای تمرین‌ها رو اضافه کنی
+        }
+        
+        // --- بخش آزمون (کد قبلی) ---
+        let score = 0;
+        let currentQuestion = 0;
+        const totalQuestions = 10;
+        let questions = [];
+        let selectedOption = -1;
+        
+        function generateQuestions() {
+            // سوالات چهارجوابی از PDF کتاب 1404 + توضیح
+            const qs = [
+                {
+                    question: "اگر طول یک مستطیل ۱۲ و عرض آن ۵ باشد، محیط آن چقدر است؟",
+                    options: ["۸۵", "۳۴", "۶۰", "۱۷"],
+                    answer: 1, // ۳۴
+                    explanation: "محیط مستطیل = ۲ × (طول + عرض) = ۲ × (۱۲ + ۵) = ۲ × ۱۷ = ۳۴"
+                },
+                {
+                    question: "کدام عدد زیر اول است؟",
+                    options: ["۲۵", "۲۱", "۲۳", "۲۷"],
+                    answer: 2, // ۲۳
+                    explanation: "عدد ۲۳ فقط بر ۱ و خودش بخش‌پذیر است، پس اول است. بقیه اعداد مرکب هستند."
+                },
+                {
+                    question: "اگر ۳/۴ از یک عدد ۹ باشد، آن عدد چیست؟",
+                    options: ["۱۲", "۱۰", "۱۵", "۱۸"],
+                    answer: 0, // ۱۲
+                    explanation: "اگر ۳/۴ عدد = ۹، پس کل عدد = ۹ ÷ ۳/۴ = ۹ × ۴/۳ = ۱۲"
+                },
+                {
+                    question: "حاصل عبارت ۲/۳ + ۱/۶ چیست؟",
+                    options: ["۵/۶", "۳/۹", "۱/۲", "۴/۶"],
+                    answer: 0, // ۵/۶
+                    explanation: "برای جمع کسرها، مخرج مشترک می‌گیریم: ۲/۳ = ۴/۶ → ۴/۶ + ۱/۶ = ۵/۶"
+                },
+                {
+                    question: "حجم مکعبی که ضلع آن ۴ سانتی‌متر است، چند سانتی‌متر مکعب است؟",
+                    options: ["۱۶", "۶۴", "۱۲", "۲۴"],
+                    answer: 1, // ۶۴
+                    explanation: "حجم مکعب = ضلع × ضلع × ضلع = ۴ × ۴ × ۴ = ۶۴"
+                },
+                {
+                    question: "اگر ۲۰٪ یک عدد ۸ باشد، آن عدد چیست؟",
+                    options: ["۳۰", "۴۰", "۵۰", "۲۰"],
+                    answer: 1, // ۴۰
+                    explanation: "۲۰٪ عدد = ۸ → عدد = ۸ ÷ ۰.۲ = ۴۰"
+                },
+                {
+                    question: "کدام یک از کسرهای زیر بین ۱/۲ و ۳/۴ قرار دارد؟",
+                    options: ["۲/۳", "۱/۴", "۵/۸", "۷/۸"],
+                    answer: 0, // ۲/۳
+                    explanation: "۱/۲ = ۰.۵ و ۳/۴ = ۰.۷۵ → ۲/۳ = ۰.۶۶... که بین این دو قرار دارد."
+                },
+                {
+                    question: "اگر یک زاویه ۴۵ درجه باشد، چه نوع زاویه‌ای است؟",
+                    options: ["راست", "تند", "باز", "نیم‌صفحه"],
+                    answer: 1, // تند
+                    explanation: "زاویه تند، زاویه‌ای است که کمتر از ۹۰ درجه باشد."
+                },
+                {
+                    question: "اگر ۳ نفر کاری را در ۶ روز انجام دهند، ۶ نفر همان کار را در چند روز انجام می‌دهند؟",
+                    options: ["۳", "۴", "۲", "۱"],
+                    answer: 0, // ۳
+                    explanation: "تعداد نفر × روز = ثابت → ۳ × ۶ = ۶ × روز → روز = ۱۸ ÷ ۶ = ۳"
+                },
+                {
+                    question: "کدام عدد بین ۳ و ۴ قرار دارد؟",
+                    options: ["۳.۰۰۱", "۴.۰۰۱", "۳.۵", "۲.۹"],
+                    answer: 2, // ۳.۵
+                    explanation: "عدد ۳.۵ بین ۳ و ۴ قرار دارد، چون ۳ < ۳.۵ < ۴"
+                }
+            ];
+            return qs;
+        }
+        
+        function playSound(isCorrect) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+                
+                if (isCorrect) {
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+                } else {
+                    oscillator.frequency.value = 400;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                }
+                
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + (isCorrect ? 0.2 : 0.3));
+            } catch (e) {
+                // اگر صدا نشد، مشکلی نیست
+            }
+        }
+        
+        function startGame() {
+            questions = generateQuestions();
+            score = 0;
+            currentQuestion = 0;
+            document.getElementById('score').textContent = score;
+            document.getElementById('qNum').textContent = currentQuestion + 1;
+            document.getElementById('totalQ').textContent = totalQuestions;
+            
+            loadQuestion();
+            
+            document.getElementById('progressFill').style.width = '0%';
+        }
+        
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerHTML = q.question;
+            
+            const optionBtns = document.querySelectorAll('.option-btn');
+            for (let i = 0; i < 4; i++) {
+                optionBtns[i].textContent = q.options[i];
+                optionBtns[i].style.background = '#e3f2fd';
+                optionBtns[i].style.borderColor = '#bbdefb';
+            }
+            
+            selectedOption = -1;
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('explanationBox').classList.add('hidden');
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+        
+        function selectOption(index) {
+            if (selectedOption !== -1) {
+                const prevBtn = document.querySelectorAll('.option-btn')[selectedOption];
+                prevBtn.style.background = '#e3f2fd';
+                prevBtn.style.borderColor = '#bbdefb';
+            }
+            
+            selectedOption = index;
+            const btn = document.querySelectorAll('.option-btn')[index];
+            btn.style.background = '#4fc3f7';
+            btn.style.borderColor = '#0288d1';
+            
+            document.getElementById('submitBtn').style.display = 'block';
+        }
+        
+        function checkAnswer() {
+            if (selectedOption === -1) {
+                alert("لطفاً یک گزینه انتخاب کنید!");
+                return;
+            }
+            
+            const correctAnswer = questions[currentQuestion].answer;
+            const optionBtns = document.querySelectorAll('.option-btn');
+            
+            if (selectedOption === correctAnswer) {
+                score++;
+                playSound(true);
+                optionBtns[selectedOption].style.background = '#d32f2f'; // قرمز
+                optionBtns[selectedOption].style.borderColor = '#b71c1c';
+                alert("🎉 آفرین! درسته!");
+            } else {
+                playSound(false);
+                optionBtns[selectedOption].style.background = '#ef9a9a';
+                optionBtns[selectedOption].style.borderColor = '#d32f2f';
+                optionBtns[correctAnswer].style.background = '#d32f2f'; // قرمز
+                optionBtns[correctAnswer].style.borderColor = '#b71c1c';
+                alert(`💡 جواب درست: ${questions[currentQuestion].options[correctAnswer]}`);
+            }
+            
+            document.getElementById('explanationBox').innerHTML = questions[currentQuestion].explanation;
+            document.getElementById('explanationBox').classList.remove('hidden');
+            
+            currentQuestion++;
+            
+            const progressPercent = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+            
+            if (currentQuestion < totalQuestions) {
+                setTimeout(() => {
+                    document.getElementById('qNum').textContent = currentQuestion + 1;
+                    document.getElementById('score').textContent = score;
+                    document.getElementById('explanationBox').classList.add('hidden');
+                    loadQuestion();
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                    alert(`آزمون تموم شد! امتیازت: ${score} از ${totalQuestions}`);
+                    backToMainMenu();
+                }, 1500);
+            }
+        }
+        
+        function nextQuestion() {
+            // این تابع در این نسخه استفاده نمی‌شه
+        }
+    </script>
+</body>
+</html>

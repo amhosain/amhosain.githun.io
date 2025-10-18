@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 ریاضی‌یاد - کلاس پنجم (کتاب 1404)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #e0f7fa, #f0f8ff);
+            min-height: 100vh;
+            padding: 20px;
+            color: #0d47a1;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(to right, #4a90e2, #5e72e4);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 25px;
+        }
+        .welcome-screen {
+            text-align: center;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+        }
+        input {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.3em;
+            border: 3px solid #bbdefb;
+            border-radius: 12px;
+            text-align: center;
+            margin: 15px 0;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+        }
+        button {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.4em;
+            background: linear-gradient(to right, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.02);
+        }
+        .question-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 3px solid #4fc3f7;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.6em;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(79, 195, 247, 0.2);
+        }
+        .status {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 15px 0;
+            color: #555;
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4caf50, #8bc34a);
+            width: 0%;
+            transition: width 0.4s;
+        }
+        .result {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+        }
+        .emoji {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .score {
+            font-weight: bold;
+            color: #e65100;
+            font-size: 1.3em;
+        }
+        .leaderboard {
+            background: #fff3e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .leaderboard h3 {
+            color: #ef6c00;
+            margin-bottom: 10px;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px dashed #ffcc80;
+        }
+        .send-email {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 ریاضی‌یاد - کلاس پنجم</h1>
+            <p>نسخه کتاب 1404 - تمام مباحث!</p>
+        </div>
+        
+        <div class="content">
+            <div id="welcome" class="welcome-screen">
+                <div class="avatar">📚</div>
+                <p style="font-size:1.3em; margin:10px 0; color:#0d47a1;">
+                    سلام! اسمت رو وارد کن تا شروع کنیم! 😊
+                </p>
+                <input type="text" id="nameInput" placeholder="اسمتو وارد کن..." maxlength="20">
+                <button onclick="startGame()">شروع بازی 🎮</button>
+            </div>
+            
+            <div id="game" class="hidden">
+                <div class="status">
+                    سؤال <span id="qNum">1</span> از <span id="totalQ">15</span>  
+                    <br><span class="score">امتیاز: <span id="score">0</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="question-box" id="question">سوال اینجا نمایش داده می‌شه...</div>
+                <input type="text" id="answer" placeholder="پاسخ خودت رو وارد کن..." autocomplete="off">
+                <button onclick="checkAnswer()">بررسی پاسخ ✅</button>
+            </div>
+            
+            <div id="result" class="hidden">
+                <div class="result">
+                    <div class="emoji" id="emoji">🎉</div>
+                    <h2>نتیجه نهایی</h2>
+                    <p>نام: <span id="resultName"></span></p>
+                    <p>امتیاز: <span id="finalScore">0</span> از <span id="totalScore">15</span></p>
+                    <p id="message">آفرین!</p>
+                    
+                    <div class="leaderboard">
+                        <h3>🏆 رده‌بندی کلی</h3>
+                        <div id="leaderboardList"></div>
+                    </div>
+                    
+                    <div class="send-email">
+                        <input type="email" id="emailInput" placeholder="آدرس ایمیل (اختیاری)">
+                        <button onclick="sendResult()">ارسال نتیجه به ایمیل 📧</button>
+                    </div>
+                    
+                    <button onclick="restartGame()">بازی دوباره؟ 🔄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let name = "";
+        let score = 0;
+        let currentQuestion = 0;
+        const totalQuestions = 15;
+        let questions = [];
+        
+        function generateQuestions() {
+            // مباحث کتاب ریاضی پنجم 1404
+            const topics = [
+                "کسر - جمع", "کسر - تفریق", "کسر - ضرب", "کسر - تقسیم",
+                "اعشار - جمع", "اعشار - تفریق", "اعشار - ضرب", "اعشار - تقسیم",
+                "مساحت", "حجم", "الگو", "زمان", "نسبت", "درصد", "اعداد اول"
+            ];
+            const qs = [];
+            
+            for (let i = 0; i < totalQuestions; i++) {
+                const topic = topics[Math.floor(Math.random() * topics.length)];
+                let q, ans;
+                
+                if (topic.includes("کسر")) {
+                    const den = Math.floor(Math.random() * 11) + 2;
+                    let n1 = Math.floor(Math.random() * (den - 1)) + 1;
+                    let n2 = Math.floor(Math.random() * (den - 1)) + 1;
+                    if (n1 < n2) [n1, n2] = [n2, n1];
+                    
+                    if (topic === "کسر - جمع") {
+                        q = `🧮 ${n1}/${den} + ${n2}/${den} = ? (فقط صورت)`;
+                        ans = n1 + n2;
+                    } else if (topic === "کسر - تفریق") {
+                        q = `🧮 ${n1}/${den} - ${n2}/${den} = ? (فقط صورت)`;
+                        ans = n1 - n2;
+                    } else if (topic === "کسر - ضرب") {
+                        const den2 = Math.floor(Math.random() * 11) + 2;
+                        const n3 = Math.floor(Math.random() * (den2 - 1)) + 1;
+                        q = `🧮 ${n1}/${den} × ${n3}/${den2} = ? (صورت)`;
+                        ans = n1 * n3;
+                    } else { // تقسیم
+                        const den2 = Math.floor(Math.random() * 11) + 2;
+                        const n3 = Math.floor(Math.random() * (den2 - 1)) + 1;
+                        q = `🧮 ${n1}/${den} ÷ ${n3}/${den2} = ? (صورت)`;
+                        ans = (n1 * den2);
+                    }
+                } else if (topic.includes("اعشار")) {
+                    const a = Math.round((Math.random() * 49 + 1) * 10) / 10;
+                    const b = Math.round((Math.random() * 19 + 1) * 10) / 10;
+                    const aFinal = a > b ? a : b;
+                    const bFinal = a > b ? b : a;
+                    
+                    if (topic === "اعشار - جمع") {
+                        q = `🔢 ${aFinal} + ${bFinal} = ? (یک رقم اعشار)`;
+                        ans = Math.round((aFinal + bFinal) * 10) / 10;
+                    } else if (topic === "اعشار - تفریق") {
+                        q = `🔢 ${aFinal} - ${bFinal} = ? (یک رقم اعشار)`;
+                        ans = Math.round((aFinal - bFinal) * 10) / 10;
+                    } else if (topic === "اعشار - ضرب") {
+                        q = `🔢 ${aFinal} × ${bFinal} = ? (یک رقم اعشار)`;
+                        ans = Math.round((aFinal * bFinal) * 10) / 10;
+                    } else { // تقسیم
+                        q = `🔢 ${aFinal} ÷ ${bFinal} = ? (یک رقم اعشار)`;
+                        ans = Math.round((aFinal / bFinal) * 10) / 10;
+                    }
+                } else if (topic === "مساحت") {
+                    const s = Math.floor(Math.random() * 12) + 4;
+                    q = `📏 مساحت مربع با ضلع ${s}؟`;
+                    ans = s * s;
+                } else if (topic === "حجم") {
+                    const l = Math.floor(Math.random() * 7) + 2;
+                    const w = Math.floor(Math.random() * 5) + 2;
+                    const h = Math.floor(Math.random() * 4) + 2;
+                    q = `📦 حجم مکعب‌مستطیل ${l}×${w}×${h}؟`;
+                    ans = l * w * h;
+                } else if (topic === "الگو") {
+                    const start = Math.floor(Math.random() * 10) + 1;
+                    const step = Math.floor(Math.random() * 5) + 2;
+                    const seq = [start, start+step, start+2*step, start+3*step];
+                    q = `🔍 الگو: ${seq.join(', ')}, بعدی؟`;
+                    ans = start + 4*step;
+                } else if (topic === "زمان") {
+                    const h = Math.floor(Math.random() * 5) + 1;
+                    q = `⏱️ ${h} ساعت چند دقیقه است؟`;
+                    ans = h * 60;
+                } else if (topic === "نسبت") {
+                    const a = Math.floor(Math.random() * 5) + 2;
+                    const b = Math.floor(Math.random() * 100) + 100;
+                    const c = Math.floor(Math.random() * 5) + 2;
+                    q = `⚖️ اگر ${a} عدد ${b} تومان، ${c} عدد چند تومان است؟`;
+                    ans = Math.floor((b / a) * c);
+                } else if (topic === "درصد") {
+                    const p = [10, 20, 25, 50][Math.floor(Math.random() * 4)];
+                    const num = Math.floor(Math.random() * 81) + 20;
+                    q = `💯 ${p}% عدد ${num} چند است؟`;
+                    ans = Math.floor((p * num) / 100);
+                } else { // اعداد اول
+                    const num = Math.floor(Math.random() * 30) + 2;
+                    let isPrime = true;
+                    if (num > 1) {
+                        for (let i = 2; i < num; i++) {
+                            if (num % i === 0) {
+                                isPrime = false;
+                                break;
+                            }
+                        }
+                    }
+                    q = `🔢 عدد ${num} اول است؟ (1=بله، 0=خیر)`;
+                    ans = isPrime ? 1 : 0;
+                }
+                
+                qs.push({ question: q, answer: ans, topic: topic });
+            }
+            return qs;
+        }
+        
+        function playSound(isCorrect) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+                
+                if (isCorrect) {
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+                } else {
+                    oscillator.frequency.value = 400;
+                    oscillator.type = 'sine';
+                    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+                }
+                
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + (isCorrect ? 0.2 : 0.3));
+            } catch (e) {
+                // اگر صدا نشد، مشکلی نیست
+            }
+        }
+        
+        function startGame() {
+            name = document.getElementById('nameInput').value.trim();
+            if (!name) name = "بچه‌ی باهوش";
+            
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('game').classList.remove('hidden');
+            
+            questions = generateQuestions();
+            score = 0;
+            currentQuestion = 0;
+            document.getElementById('score').textContent = score;
+            document.getElementById('qNum').textContent = currentQuestion + 1;
+            document.getElementById('totalQ').textContent = totalQuestions;
+            document.getElementById('question').innerHTML = questions[currentQuestion].question;
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
+            
+            document.getElementById('progressFill').style.width = '0%';
+        }
+        
+        function checkAnswer() {
+            const userAnswer = document.getElementById('answer').value.trim();
+            if (!userAnswer) {
+                alert("لطفاً یک پاسخ وارد کنید!");
+                return;
+            }
+            
+            const correctAnswer = questions[currentQuestion].answer;
+            const userNum = parseFloat(userAnswer);
+            
+            if (Math.abs(userNum - correctAnswer) < 0.01) {
+                score++;
+                playSound(true);
+                alert("🎉 آفرین! درسته!");
+            } else {
+                playSound(false);
+                alert(`💡 جواب درست: ${correctAnswer}`);
+            }
+            
+            currentQuestion++;
+            
+            const progressPercent = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+            
+            if (currentQuestion < totalQuestions) {
+                document.getElementById('qNum').textContent = currentQuestion + 1;
+                document.getElementById('score').textContent = score;
+                document.getElementById('question').innerHTML = questions[currentQuestion].question;
+                document.getElementById('answer').value = '';
+                document.getElementById('answer').focus();
+            } else {
+                showResult();
+            }
+        }
+        
+        function showResult() {
+            document.getElementById('game').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            
+            document.getElementById('resultName').textContent = name;
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('totalScore').textContent = totalQuestions;
+            
+            const percent = (score / totalQuestions) * 100;
+            let msg, emoji;
+            
+            if (percent >= 90) {
+                msg = "🥇 نابغه ریاضی! همه رو بلدی!";
+                emoji = "🌟";
+            } else if (percent >= 70) {
+                msg = "🥈 عالی! کمی دیگه تمرین کن، کامل می‌شی!";
+                emoji = "💪";
+            } else if (percent >= 50) {
+                msg = "🥉 خوبه! ولی می‌تونی بهتر هم باشی!";
+                emoji = "📚";
+            } else {
+                msg = "🌈 هر روز 10 دقیقه تمرین کن — حتماً قوی می‌شی!";
+                emoji = "🌱";
+            }
+            
+            document.getElementById('message').textContent = msg;
+            document.getElementById('emoji').textContent = emoji;
+            
+            // ذخیره پیشرفت
+            const progress = JSON.parse(localStorage.getItem('mathProgress') || '{}');
+            if (!progress[name]) progress[name] = [];
+            progress[name].push({ score, total: totalQuestions, date: new Date().toISOString() });
+            localStorage.setItem('mathProgress', JSON.stringify(progress));
+            
+            // نمایش رده‌بندی
+            showLeaderboard();
+        }
+        
+        function showLeaderboard() {
+            const progress = JSON.parse(localStorage.getItem('mathProgress') || '{}');
+            const scores = [];
+            
+            for (let playerName in progress) {
+                const playerScores = progress[playerName];
+                if (playerScores.length > 0) {
+                    const lastScore = playerScores[playerScores.length - 1];
+                    scores.push({ name: playerName, score: lastScore.score, date: lastScore.date });
+                }
+            }
+            
+            scores.sort((a, b) => b.score - a.score);
+            
+            const list = document.getElementById('leaderboardList');
+            list.innerHTML = '';
+            
+            for (let i = 0; i < Math.min(5, scores.length); i++) {
+                const item = document.createElement('div');
+                item.className = 'leaderboard-item';
+                item.innerHTML = `<span>${scores[i].name}</span><span>${scores[i].score}</span>`;
+                list.appendChild(item);
+            }
+        }
+        
+        function sendResult() {
+            const email = document.getElementById('emailInput').value.trim();
+            if (!email) {
+                alert("لطفاً یه ایمیل وارد کن!");
+                return;
+            }
+            
+            const subject = encodeURIComponent("نتیجه بازی ریاضی‌یاد");
+            const body = encodeURIComponent(
+                `سلام!\n\nنتیجه بازی ریاضی‌یاد:\nنام: ${name}\nامتیاز: ${score} از ${totalQuestions}\n\nممنون که بازی کردی! 🎉`
+            );
+            
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        }
+        
+        function restartGame() {
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('welcome').classList.remove('hidden');
+            document.getElementById('nameInput').value = name;
+            document.getElementById('nameInput').focus();
+        }
+    </script>
+</body>
+</html>
